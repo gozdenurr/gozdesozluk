@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tüm Sözlükler</title>
+</head>
+<body>
+    <h1>Tüm Sözlükler</h1>
+    <table border="1">
+        <tr>
+            <th>Kelime</th>
+            <th>Anlamı</th>
+            <th>Görsel</th>
+        </tr>
+        {% for sozluk in data %}
+            {% for kelime, bilgi in sozluk.items() %}
+                <tr>
+                    <td>{{ kelime }}</td>
+                    <td>{{ bilgi.anlam }}</td>
+                    <td>
+                        <img src="/static/{{ bilgi.gorsel }}" alt="{{ kelime }}" style="width: 100px; height: auto;">
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <a href="/">Ana Sayfaya Dön</a>
+</body>
+</html>
