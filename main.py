@@ -11,7 +11,6 @@ sozlukler = [
     {"fondöten": {"anlam": "foundation", "gorsel": "images/fondöten.jpg"}},
     {"dudak kalemi": {"anlam": "lip liner", "gorsel": "images/dudakkalemi.jpg"}},
     {"far paleti": {"anlam": "eyeshadow palette", "gorsel": "images/farpaleti.jpg"}},
-    
 ]
 
 @app.route("/")
@@ -25,22 +24,23 @@ def sozluk():
 
 @app.route("/arama", methods=["GET"])
 def arama():
-    # Kullanıcıdan gelen anahtar kelimeyi al
-    anahtar_kelime = request.args.get("anahtarKelime")
+    # Kullanıcıdan gelen anahtar kelimeyi al ve küçük harfe çevir
+    anahtar_kelime = request.args.get("anahtarKelime", "").strip().lower()
     
     if not anahtar_kelime:
         return "Lütfen bir anahtar kelime giriniz."
     
-    # Sözlüklerde arama yap
+    # Sözlüklerde küçük harflerle arama yap
     for sozluk in sozlukler:
-        if anahtar_kelime in sozluk:
-            kelime_bilgisi = sozluk[anahtar_kelime]
-            return render_template(
-                "sonuc.html",
-                kelime=anahtar_kelime,
-                anlam=kelime_bilgisi["anlam"],
-                gorsel=f"/static/{kelime_bilgisi['gorsel']}"
-            )
+        for key in sozluk:
+            if anahtar_kelime == key.lower():  # Küçük harf karşılaştırması
+                kelime_bilgisi = sozluk[key]
+                return render_template(
+                    "sonuc.html",
+                    kelime=key.capitalize(),  # Görünümü güzelleştirmek için ilk harfi büyük yapıyoruz
+                    anlam=kelime_bilgisi["anlam"],
+                    gorsel=f"/static/{kelime_bilgisi['gorsel']}"
+                )
     
     # Kelime bulunamadığında
     return f"{anahtar_kelime} kelimesi sözlükte bulunamadı."
