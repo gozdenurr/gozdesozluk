@@ -10,7 +10,7 @@ sozlukler = [
     {"allık": {"anlam": "blush", "gorsel": "images/allık.jpg"}},
     {"fondöten": {"anlam": "foundation", "gorsel": "images/fondöten.jpg"}},
     {"dudak kalemi": {"anlam": "lip liner", "gorsel": "images/dudakkalemi.jpg"}},
-    {"far paleti ": {"anlam": "eyeshadow palette", "gorsel": "images/farpaleti.jpg"}},
+    {"far paleti": {"anlam": "eyeshadow palette", "gorsel": "images/farpaleti.jpg"}},
     
 ]
 
